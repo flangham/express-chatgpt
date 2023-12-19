@@ -7,34 +7,39 @@ const app = express();
 const port = 8000;
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-const allowedOrigins = [
-  'http://localhost:8000',
-  'https://loveandmoney.brandtoolk.it/',
-];
+// Middleware
+app.use(cors()); // This allows all origins
 
+// const allowedOrigins = [
+//   'http://localhost:8000',
+//   'https://loveandmoney.brandtoolk.it/',
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // Allow requests with no origin (like mobile apps or curl requests)
+//       if (!origin) return callback(null, true);
+
+//       if (!allowedOrigins.includes(origin)) {
+//         const msg =
+//           'The CORS policy for this site does not ' +
+//           'allow access from the specified Origin.';
+//         return callback(new Error(msg), false);
+//       }
+//       return callback(null, true);
+//     },
+//   })
+// );
+
+app.use(express.json());
+
+// App config
 app.listen(port, () => {
   console.log('Server started on port: ' + port);
 });
 
-app.use(express.json());
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
-      if (!allowedOrigins.includes(origin)) {
-        const msg =
-          'The CORS policy for this site does not ' +
-          'allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
-
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
