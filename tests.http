@@ -1,0 +1,6 @@
+post http://localhost:8000 
+Content-type: application/json
+
+{
+  "prompt": "Write a haiku about a tree"
+}
