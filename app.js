@@ -9,7 +9,7 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 const allowedOrigins = [
   'http://localhost:8000',
-  'https://loveandmoney.brandtoolk.it/', // Your production URL
+  'https://loveandmoney.brandtoolk.it/',
 ];
 
 app.listen(port, () => {
@@ -40,6 +40,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', async (req, res) => {
+  console.log(req.body);
+
   if (!req.body.prompt) {
     res.status(400).send('Bad Request');
     return;
