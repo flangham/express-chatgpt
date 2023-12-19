@@ -40,8 +40,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-  console.log(req.body);
-
   if (!req.body.prompt) {
     res.status(400).send('Bad Request');
     return;
