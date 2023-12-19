@@ -13,6 +13,10 @@ app.listen(port, () => {
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 app.post('/', async (req, res) => {
   try {
     const stream = await openai.chat.completions.create({
